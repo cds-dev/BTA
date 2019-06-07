@@ -1,0 +1,26 @@
+﻿@model BTA.Models.Module
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Module</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.module1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.module1)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.moduleId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
