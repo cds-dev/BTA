@@ -3,7 +3,7 @@
 
 # My additions
 Migrations/*
-Web.config
+BTA/Web.config
 
 # Project specific
 node_modules/*
