@@ -52,7 +52,7 @@ namespace BTA.Controllers
             var cityName = city.city1;
 
             string url = "https://maps.googleapis.com/maps/api/geocode/json?sensor=true&address=";
-            string key = "&key=${GoogleApiKey}";
+            string key = "&key=AIzaSyBfk7X7wgTZqK60Un7bsMNCb37wxPYF3uY";
 
             dynamic googleResults = new Uri(url + cityName + key).GetDynamicJsonObject();
 
