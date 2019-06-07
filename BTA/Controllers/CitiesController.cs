@@ -49,7 +49,7 @@ namespace BTA.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "cityId,city1,country,population,lon,lat,image")] City city)
-        {
+        {   
             var cityName = city.city1;
 
             string url = "https://maps.googleapis.com/maps/api/geocode/json?sensor=true&address=";
