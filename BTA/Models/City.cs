@@ -20,6 +20,7 @@ namespace BTA.Models
 
         [Column("city")]
         [Required]
+        [Display(Name = "City")]
         [StringLength(20)]
         public string city1 { get; set; }
 
