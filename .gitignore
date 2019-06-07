@@ -4,6 +4,7 @@
 # My additions
 Migrations/*
 Web.config
+Assets/appsettings.json
 
 # Project specific
 node_modules/*
