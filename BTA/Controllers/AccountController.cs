@@ -46,15 +46,20 @@ namespace BTA.Controllers
         }
 
         // dodato – metoda koja puni listu sa rolama
-        private void popuniRole()
-        {
-            List<SelectListItem> list = new List<SelectListItem>();
-            foreach (var role in RoleManager.Roles)
-            {
-                list.Add(new SelectListItem() { Value = role.Name, Text = role.Name });
-            }
-            ViewBag.Roles = list;
-        }
+        //private void popuniRole()
+        //{
+        //    List<SelectListItem> list = new List<SelectListItem>();
+        //    if (RoleManager.Roles.Count() > 0) {
+        //        foreach (var role in RoleManager.Roles)
+        //        {
+        //            list.Add(new SelectListItem() { Value = role.Name, Text = role.Name });
+        //            ViewBag.Roles = list;
+        //        }
+        //        //ViewBag.Roles = list;
+        //    }
+            
+            
+        //}
 
         public ApplicationSignInManager SignInManager
         {
@@ -168,7 +173,7 @@ namespace BTA.Controllers
         public ActionResult Register()
         {
             // dodato 
-            popuniRole();
+            //popuniRole();
             return View();
         }
 
@@ -220,8 +225,8 @@ namespace BTA.Controllers
                 AddErrors(result);
             }
 
-            else { popuniRole(); }
-            popuniRole();
+            //else { popuniRole(); }
+            //popuniRole();
 
             // If we got this far, something failed, redisplay form
             return View(model);

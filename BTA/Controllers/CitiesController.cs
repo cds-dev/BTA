@@ -52,6 +52,11 @@ namespace BTA.Controllers
         {   
             var cityName = city.city1;
 
+            System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Ssl3
+                    | System.Net.SecurityProtocolType.Tls
+                    | System.Net.SecurityProtocolType.Tls11
+                    | System.Net.SecurityProtocolType.Tls12;
+
             //google geocoding api
             string gcUrl = "https://maps.googleapis.com/maps/api/geocode/json?sensor=true&address=";
             string apiKey = Environment.ExpandEnvironmentVariables(
