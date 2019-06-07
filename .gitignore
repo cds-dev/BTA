@@ -5,6 +5,7 @@
 Migrations/*
 Web.config
 BTA/Web.config
+*.config
 
 # Project specific
 node_modules/*
