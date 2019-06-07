@@ -5,6 +5,7 @@
 Migrations/*
 BTA/Web.config
 *.config
+BTA/BTA.csproj
 Web.config
 Assets/appsettings.json
 
