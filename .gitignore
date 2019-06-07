@@ -3,6 +3,8 @@
 
 # My additions
 Migrations/*
+BTA/Web.config
+*.config
 Web.config
 Assets/appsettings.json
 
