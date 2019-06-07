@@ -3,7 +3,7 @@
 
 # My additions
 Migrations/*
-#Web.config
+Web.config
 
 # Project specific
 node_modules/*
