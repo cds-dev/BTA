@@ -52,20 +52,25 @@ namespace BTA.Controllers
         {   
             var cityName = city.city1;
 
-            string url = "https://maps.googleapis.com/maps/api/geocode/json?sensor=true&address=";
+            //google geocoding api
+            string gcUrl = "https://maps.googleapis.com/maps/api/geocode/json?sensor=true&address=";
             string apiKey = Environment.ExpandEnvironmentVariables(
                     ConfigurationManager.AppSettings["GoogleAPI"]);
 
             string key = "&key=" + apiKey;
 
-            dynamic googleResults = new Uri(url + cityName + key).GetDynamicJsonObject();
+            dynamic googleResults = new Uri(gcUrl + cityName + key).GetDynamicJsonObject();
+
+            //opendatasoft api - population 
+            string odUrl = "https://public.opendatasoft.com/api/records/1.0/search/?dataset=worldcitiespop&sort=population&facet=city&refine.city=" + cityName;
+            dynamic populationResults = new Uri(odUrl).GetDynamicJsonObject();
 
             city.city1 = Convert.ToString(googleResults.results[0].address_components[0].long_name);
             city.cityId =  Convert.ToString(googleResults.results[0].place_id);
             city.country = Convert.ToString(googleResults.results[0].address_components[googleResults.results[0].address_components.Length-1].long_name);
             city.lat = Convert.ToDouble(googleResults.results[0].geometry.location.lat);
             city.lon = Convert.ToDouble(googleResults.results[0].geometry.location.lng);
-            //city.population = googleResults.result.population;
+            city.population = Convert.ToInt32(populationResults.records[0].fields.population);
 
             if (ModelState.IsValid)
             {
