@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using BTA.Models;
+using System.Configuration;
 
 namespace BTA.Controllers
 {
@@ -52,7 +53,10 @@ namespace BTA.Controllers
             var cityName = city.city1;
 
             string url = "https://maps.googleapis.com/maps/api/geocode/json?sensor=true&address=";
-            string key = "&key=AIzaSyBfk7X7wgTZqK60Un7bsMNCb37wxPYF3uY";
+            string apiKey = Environment.ExpandEnvironmentVariables(
+                    ConfigurationManager.AppSettings["GoogleAPI"]);
+
+            string key = "&key=" + apiKey;
 
             dynamic googleResults = new Uri(url + cityName + key).GetDynamicJsonObject();
 
