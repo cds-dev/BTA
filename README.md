@@ -10,6 +10,7 @@ App is meant to allow company employees to leave feedback and ratings on their p
 ### on backend
 - Google Geocodes
 - OpenGraph
+- opendatasoft (for gathering city population)
 
 ### on frontend
 - Open Weather
