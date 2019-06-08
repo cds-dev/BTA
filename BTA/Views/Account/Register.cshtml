@@ -20,7 +20,8 @@
     <div class="form-group">
         @Html.LabelFor(m => m.Traveler.imgUrl, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Traveler.imgUrl, new { @class = "form-control" })
+            <input type="file" enctype="multipart/form-data"  />
+            @*@Html.TextBoxFor(m => m.Traveler.imgUrl, new { @class = "form-control" })*@
         </div>
     </div>
     <div class="form-group">
