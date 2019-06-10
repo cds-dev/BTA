@@ -8,6 +8,7 @@ BTA/Web.config
 BTA/BTA.csproj
 Web.config
 Assets/appsettings.json
+BTA/Migrations
 
 
 # Project specific
