@@ -5,6 +5,7 @@ namespace BTA.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Web;
 
     [Table("Traveler")]
     public partial class Traveler
@@ -25,6 +26,9 @@ namespace BTA.Models
         [StringLength(150)]
         [Display(Name ="Profile picture")]
         public string imgUrl { get; set; }
+
+        [NotMapped]
+        public HttpPostedFileBase imageFile { get; set; }
 
         [StringLength(50)]
         [Display(Name = "Full name")]
