@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using BTA.Models;
+using System.Configuration;
 
 namespace BTA.Controllers
 {
@@ -52,6 +53,20 @@ namespace BTA.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "poiId,city,name,address,website,poiImg,rating,lon,lat,phone,email,category")] POI pOI)
         {
+            var poiName = pOI.name;
+
+            //google geocoding api
+            string gcUrl = "https://maps.googleapis.com/maps/api/geocode/json?sensor=true&address=";
+            string key = "&key=" + Environment.ExpandEnvironmentVariables(
+                    ConfigurationManager.AppSettings["GoogleAPI"]);
+
+            //string key = "&key=" + apiKey;
+
+            dynamic googleResults = new Uri(gcUrl + poiName + key).GetDynamicJsonObject();
+
+            pOI.poiId = Convert.ToString(googleResults.results[0].place_id);
+            pOI.name = Convert.ToString(googleResults.results[0].address_components[0].long_name);
+
             if (ModelState.IsValid)
             {
                 db.POIs.Add(pOI);
