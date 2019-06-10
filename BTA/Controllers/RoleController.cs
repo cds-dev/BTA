@@ -8,6 +8,7 @@ using BTA.ViewModels;
 using Microsoft.AspNet.Identity.Owin;
 using static BTA.ApplicationSignInManager;
 using static BTA.Models.ApplicationDbContext;
+using BTA.Models;
 
 namespace BTA.Controllers
 {
@@ -17,15 +18,12 @@ namespace BTA.Controllers
         public ActionResult Index()
         {
             List<RoleViewModel> list = new List<RoleViewModel>();
-            if (RoleManager.Roles.Count() > 0) {
+            
                 foreach (var role in RoleManager.Roles)
                 {
                     list.Add(new RoleViewModel(role));
                 }
                 return View(list);
-            }
-            return View();
-            
         }
 
         public ActionResult Create()
