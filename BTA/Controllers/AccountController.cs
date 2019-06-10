@@ -11,6 +11,9 @@ using Microsoft.Owin.Security;
 using BTA.Models;
 using static BTA.ApplicationSignInManager;
 using System.Collections.Generic;
+using System.IO;
+using System.Web.UI.WebControls;
+using System.Drawing;
 
 namespace BTA.Controllers
 {
@@ -46,20 +49,21 @@ namespace BTA.Controllers
         }
 
         // dodato – metoda koja puni listu sa rolama
-        //private void popuniRole()
-        //{
-        //    List<SelectListItem> list = new List<SelectListItem>();
-        //    if (RoleManager.Roles.Count() > 0) {
-        //        foreach (var role in RoleManager.Roles)
-        //        {
-        //            list.Add(new SelectListItem() { Value = role.Name, Text = role.Name });
-        //            ViewBag.Roles = list;
-        //        }
-        //        //ViewBag.Roles = list;
-        //    }
-            
-            
-        //}
+        private void popuniRole()
+        {
+            List<SelectListItem> list = new List<SelectListItem>();
+            //if (RoleManager.Roles.Count() > 0)
+            //{
+                foreach (var role in RoleManager.Roles)
+                {
+                    list.Add(new SelectListItem() { Value = role.Name, Text = role.Name });
+                    ViewBag.Roles = list;
+                }
+                
+            //}
+
+
+        }
 
         public ApplicationSignInManager SignInManager
         {
@@ -173,7 +177,7 @@ namespace BTA.Controllers
         public ActionResult Register()
         {
             // dodato 
-            //popuniRole();
+            popuniRole();
             return View();
         }
 
@@ -182,7 +186,7 @@ namespace BTA.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model, HttpPostedFileBase imageFile)
         {
             if (ModelState.IsValid)
             {
@@ -190,16 +194,30 @@ namespace BTA.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
-                {   
-                    //ADDING TRAVELER to REGISTAR
+                {
+                    //ADDING TRAVELER to REGISTER
 
-                    Traveler traveler = new Traveler()
+                    Traveler traveler = new Traveler();
+
+                    //IMG zezanje
+                    if(imageFile != null)
                     {
-                        identityId = user.Id,
-                        activity = true,
-                        imgUrl = model.Traveler.imgUrl,
-                        fullName = model.Traveler.fullName
-                    };
+                        string extension = Path.GetExtension(imageFile.FileName);
+                        string photoName = user.Email.Split('@')[0];
+                        string fileName = photoName + extension;
+                        traveler.imgUrl = "~/Assets/Images/" + fileName;
+                        fileName = Path.Combine(Server.MapPath("~/Assets/Images/"), fileName);
+                        traveler.imageFile = imageFile;
+                        traveler.imageFile.SaveAs(fileName);
+                    }
+                    else
+                    {
+                        traveler.imageFile = null;
+                    }
+                    
+                    traveler.identityId = user.Id;
+                    traveler.activity = true;
+                    traveler.fullName = model.Traveler.fullName;
 
                     if (ModelState.IsValid)
                     {
@@ -210,7 +228,7 @@ namespace BTA.Controllers
 
                     // dodato 
                     result = await UserManager.AddToRoleAsync(user.Id, model.RoleName);
-                    // otkomentarisano
+                    
                     //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
@@ -221,11 +239,11 @@ namespace BTA.Controllers
 
                     return RedirectToAction("Index", "Home");
                 }
-
+                else { popuniRole(); }
                 AddErrors(result);
             }
 
-            //else { popuniRole(); }
+            
             //popuniRole();
 
             // If we got this far, something failed, redisplay form
