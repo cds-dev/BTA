@@ -3,9 +3,16 @@
 
 # My additions
 Migrations/*
-Web.config
 BTA/Web.config
 *.config
+BTA/BTA.csproj
+Web.config
+<<<<<<< HEAD
+BTA/Web.config
+*.config
+=======
+Assets/appsettings.json
+>>>>>>> cd7ace2342630093874511a0fc4b5ae855af6aa7
 
 # Project specific
 node_modules/*

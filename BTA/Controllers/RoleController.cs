@@ -17,11 +17,15 @@ namespace BTA.Controllers
         public ActionResult Index()
         {
             List<RoleViewModel> list = new List<RoleViewModel>();
-            foreach (var role in RoleManager.Roles)
-            {
-                list.Add(new RoleViewModel(role));
+            if (RoleManager.Roles.Count() > 0) {
+                foreach (var role in RoleManager.Roles)
+                {
+                    list.Add(new RoleViewModel(role));
+                }
+                return View(list);
             }
-            return View(list);
+            return View();
+            
         }
 
         public ActionResult Create()
