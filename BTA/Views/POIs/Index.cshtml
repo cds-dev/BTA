@@ -12,80 +12,104 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Category1.category1)
+            @Html.DisplayNameFor(model => model.poiImg)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.pOIDescription)
+            @*@Html.DisplayNameFor(model => model.Category1.category1)*@
+        </th>
+        @*<th>
             @Html.DisplayNameFor(model => model.City1.city1)
         </th>
         <th>
+
             @Html.DisplayNameFor(model => model.name)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.address)
-        </th>
-        <th>
+        </th>*@
+        @*<th>
             @Html.DisplayNameFor(model => model.website)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.poiImg)
-        </th>
-        <th>
+        </th>*@
+
+        @*<th>
             @Html.DisplayNameFor(model => model.rating)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.lon)
-        </th>
-        <th>
+        </th>*@
+        @*<th>
+            @Html.DisplayNameFor(model => model.lon)Coordinates
+        </th>*@
+        @*<th>
             @Html.DisplayNameFor(model => model.lat)
-        </th>
-        <th>
+        </th>*@
+        @*<th>
             @Html.DisplayNameFor(model => model.phone)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.email)
-        </th>
+        </th>*@
+        @*<th>
+            @Html.DisplayNameFor(model => model.pOIDescription)
+        </th>*@
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
+            <img src="@Html.DisplayFor(modelItem => item.poiImg)" alt="@Html.DisplayFor(modelItem => item.name)" />
+        </td>
+        <td>
+            <h2>@item.name.Substring(Convert.ToInt16(item.rating))</h2> 
+            @for (var i = 0; i < item.rating; i++)
+            {
+                <span>*</span>
+            }<br />
+            @*@Html.DisplayFor(modelItem => item.name)*@
+            @Html.DisplayFor(modelItem => item.pOIDescription) <br /><br />
+            <address>@Html.DisplayFor(modelItem => item.address), @Html.DisplayFor(modelItem => item.City1.city1)<br /></address>
+            <a href="@Html.DisplayFor(modelItem => item.website)" target="_blank">Website</a>
+        </td>
+
+
+
+
+
+        @*<td>
             @Html.DisplayFor(modelItem => item.Category1.category1)
+        </td>*@
+        @*<td>
+
         </td>
+
         <td>
-            @Html.DisplayFor(modelItem => item.City1.city1)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.address)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.website)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.poiImg)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.rating)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.lon)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.lat)
-        </td>
-        <td>
+
+        </td>*@
+        @*<td>
+
+
+
+        </td>*@
+
+        @*<td>
+
+        </td>*@
+        @*<td>
+            @Html.DisplayFor(modelItem => item.lon) / @Html.DisplayFor(modelItem => item.lat)
+        </td>*@
+        @*<td>
+
+        </td>*@
+        @*<td>
             @Html.DisplayFor(modelItem => item.phone)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.email)
-        </td>
+        </td>*@
+        @*<td></td>*@
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.poiId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.poiId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.poiId })
+            @*@Html.ActionLink("Edit", "Edit", new { id = item.poiId }) |*@
+            @Html.ActionLink("Details", "Details", new { id = item.poiId })
+            @*@Html.ActionLink("Delete", "Delete", new { id = item.poiId })*@
         </td>
     </tr>
 }
