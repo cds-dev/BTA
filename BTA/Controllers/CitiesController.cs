@@ -9,13 +9,15 @@ using System.Web;
 using System.Web.Mvc;
 using BTA.Models;
 using System.Configuration;
-
+using System.IO;
+using static BTA.ApplicationSignInManager;
 
 namespace BTA.Controllers
 {
     public class CitiesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        private ApplicationUserManager _userManager;
 
         // GET: Cities
         public async Task<ActionResult> Index()
@@ -53,7 +55,6 @@ namespace BTA.Controllers
         {   
             var cityName = city.city1;
 
-
             System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Ssl3
                     | System.Net.SecurityProtocolType.Tls
                     | System.Net.SecurityProtocolType.Tls11
@@ -71,6 +72,33 @@ namespace BTA.Controllers
             //opendatasoft api - population 
             string odUrl = "https://public.opendatasoft.com/api/records/1.0/search/?dataset=worldcitiespop&sort=population&facet=city&refine.city=" + cityName;
             dynamic populationResults = new Uri(odUrl).GetDynamicJsonObject();
+
+            //google place get photo ref api
+            string photoRefUrl = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=" + cityName + "&inputtype=textquery&fields=photos" + key;
+            dynamic photoRefResult = new Uri(photoRefUrl).GetDynamicJsonObject();
+            string photRef = Convert.ToString(photoRefResult.candidates[0].photos[0].photo_reference);
+
+            //google place photo api
+            string photoUrl = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=" + photRef + key;
+            dynamic photoResult = new Uri(photoUrl).GetDynamicJsonObject();
+
+            //city.imageFile = photoResult;
+
+            //if (photoResult != null)
+            //{
+            //    string extension = Path.GetExtension(photoResult.FileName);
+            //    string photoName = cityName;
+            //    string fileName = photoName + extension;
+            //    city.imgUrl = "~/Assets/Images/Cities" + fileName;
+            //    fileName = Path.Combine(Server.MapPath("~/Assets/Images/Cities/"), fileName);
+            //    city.imageFile = photoResult;
+            //    city.imageFile.SaveAs(fileName);
+            //}
+            //else
+            //{
+            //    city.imageFile = null;
+            //}
+
 
             city.city1 = Convert.ToString(googleResults.results[0].address_components[0].long_name);
             city.cityId =  Convert.ToString(googleResults.results[0].place_id);

@@ -199,14 +199,14 @@ namespace BTA.Controllers
 
                     Traveler traveler = new Traveler();
 
-                    //IMG zezanje
+                    //IMG user profile
                     if(imageFile != null)
                     {
                         string extension = Path.GetExtension(imageFile.FileName);
                         string photoName = user.Email.Split('@')[0];
                         string fileName = photoName + extension;
-                        traveler.imgUrl = "~/Assets/Images/" + fileName;
-                        fileName = Path.Combine(Server.MapPath("~/Assets/Images/"), fileName);
+                        traveler.imgUrl = "~/Assets/Images/Users" + fileName;
+                        fileName = Path.Combine(Server.MapPath("~/Assets/Images/Users/"), fileName);
                         traveler.imageFile = imageFile;
                         traveler.imageFile.SaveAs(fileName);
                     }
