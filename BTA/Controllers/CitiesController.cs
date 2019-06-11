@@ -74,13 +74,13 @@ namespace BTA.Controllers
             dynamic populationResults = new Uri(odUrl).GetDynamicJsonObject();
 
             //google place get photo ref api
-            string photoRefUrl = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=" + cityName + "&inputtype=textquery&fields=photos" + key;
-            dynamic photoRefResult = new Uri(photoRefUrl).GetDynamicJsonObject();
-            string photRef = Convert.ToString(photoRefResult.candidates[0].photos[0].photo_reference);
+            //string photoRefUrl = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=" + cityName + "&inputtype=textquery&fields=photos" + key;
+            //dynamic photoRefResult = new Uri(photoRefUrl).GetDynamicJsonObject();
+            //string photRef = Convert.ToString(photoRefResult.candidates[0].photos[0].photo_reference);
 
-            //google place photo api
-            string photoUrl = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=" + photRef + key;
-            dynamic photoResult = new Uri(photoUrl).GetDynamicJsonObject();
+            ////google place photo api
+            //string photoUrl = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=" + photRef + key;
+            //dynamic photoResult = new Uri(photoUrl).GetDynamicJsonObject();
 
             //city.imageFile = photoResult;
 

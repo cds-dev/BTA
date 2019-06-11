@@ -50,22 +50,45 @@ namespace BTA.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [ValidateInput(false)]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "poiId,city,name,address,website,poiImg,rating,lon,lat,phone,email,category")] POI pOI)
         {
-            var poiName = pOI.name;
+            var url = Uri.EscapeDataString(pOI.website);
+            //var urlEnc = Uri.EscapeDataString(url);
+            var ogKey = Environment.ExpandEnvironmentVariables(
+                    ConfigurationManager.AppSettings["OpenGraphAPI"]);
+            var requestUrl = "https://opengraph.io/api/1.1/site/" + url + "?app_id=" + ogKey;
+            dynamic ogResults = new Uri(requestUrl).GetDynamicJsonObject();
+
+            pOI.name = Convert.ToString(ogResults.hybridGraph.title);
+            pOI.pOIDescription = Convert.ToString(ogResults.hybridGraph.description);
+            pOI.poiImg = Convert.ToString(ogResults.hybridGraph.image);
+
+            string gcUrl = "https://maps.googleapis.com/maps/api/geocode/json?sensor=true&address=";
+            string gcKey = Environment.ExpandEnvironmentVariables(
+                    ConfigurationManager.AppSettings["GoogleAPI"]);
+
+            string key = "&key=" + gcKey;
+
+            dynamic googleResults = new Uri(gcUrl + pOI.name + key).GetDynamicJsonObject();
+            pOI.poiId = Convert.ToString(googleResults.results[0].place_id);
+            //var city = Convert.ToString(googleResults.results[0].place_id);
+            pOI.lon = Convert.ToDouble(googleResults.results[0].geometry.location.lng);
+            pOI.lat = Convert.ToDouble(googleResults.results[0].geometry.location.lat);
+
 
             //google geocoding api
-            string gcUrl = "https://maps.googleapis.com/maps/api/geocode/json?sensor=true&address=";
-            string key = "&key=" + Environment.ExpandEnvironmentVariables(
-                    ConfigurationManager.AppSettings["GoogleAPI"]);
+            //string gcUrl = "https://maps.googleapis.com/maps/api/geocode/json?sensor=true&address=";
+            //string key = "&key=" + Environment.ExpandEnvironmentVariables(
+            //        ConfigurationManager.AppSettings["GoogleAPI"]);
 
             //string key = "&key=" + apiKey;
 
-            dynamic googleResults = new Uri(gcUrl + poiName + key).GetDynamicJsonObject();
+            //dynamic googleResults = new Uri(gcUrl + poiName + key).GetDynamicJsonObject();
 
-            pOI.poiId = Convert.ToString(googleResults.results[0].place_id);
-            pOI.name = Convert.ToString(googleResults.results[0].address_components[0].long_name);
+            //pOI.poiId = Convert.ToString(googleResults.results[0].place_id);
+            //pOI.name = Convert.ToString(googleResults.results[0].address_components[0].long_name);
 
             if (ModelState.IsValid)
             {

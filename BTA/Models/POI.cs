@@ -5,8 +5,10 @@ namespace BTA.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Web.Mvc;
 
     [Table("POI")]
+    //[ValidateInput(false)]
     public partial class POI
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,7 +23,7 @@ namespace BTA.Models
         [StringLength(256)]
         public string city { get; set; }
 
-        [Required]
+        //[Required]
         [StringLength(50)]
         public string name { get; set; }
 
@@ -29,6 +31,7 @@ namespace BTA.Models
         public string address { get; set; }
 
         [StringLength(2083)]
+        
         public string website { get; set; }
 
         [StringLength(2083)]
@@ -51,6 +54,8 @@ namespace BTA.Models
         public virtual Category Category1 { get; set; }
 
         public virtual City City1 { get; set; }
+
+        public string pOIDescription { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comment> Comments { get; set; }
