@@ -62,6 +62,10 @@ namespace BTA.Controllers
             dynamic ogResults = new Uri(requestUrl).GetDynamicJsonObject();
 
             pOI.name = Convert.ToString(ogResults.hybridGraph.title);
+            //var split = ogResults.hybridGraph.title.Split(" ");
+            //var zero = split[0];
+            //var len = zero.Length;
+            pOI.rating = Convert.ToDouble(pOI.name.IndexOf(' '));
             pOI.pOIDescription = Convert.ToString(ogResults.hybridGraph.description);
             pOI.poiImg = Convert.ToString(ogResults.hybridGraph.image);
 
@@ -76,6 +80,7 @@ namespace BTA.Controllers
             //var city = Convert.ToString(googleResults.results[0].place_id);
             pOI.lon = Convert.ToDouble(googleResults.results[0].geometry.location.lng);
             pOI.lat = Convert.ToDouble(googleResults.results[0].geometry.location.lat);
+            pOI.address = Convert.ToString(googleResults.results[0].formatted_address);
 
 
             //google geocoding api
