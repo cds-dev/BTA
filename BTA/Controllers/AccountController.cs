@@ -205,7 +205,7 @@ namespace BTA.Controllers
                         string extension = Path.GetExtension(imageFile.FileName);
                         string photoName = user.Email.Split('@')[0];
                         string fileName = photoName + extension;
-                        traveler.imgUrl = "~/Assets/Images/Users" + fileName;
+                        traveler.imgUrl = "~/Assets/Images/Users/" + fileName;
                         fileName = Path.Combine(Server.MapPath("~/Assets/Images/Users/"), fileName);
                         traveler.imageFile = imageFile;
                         traveler.imageFile.SaveAs(fileName);
