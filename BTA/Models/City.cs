@@ -5,6 +5,7 @@ namespace BTA.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Web;
 
     [Table("City")]
     public partial class City
@@ -33,7 +34,10 @@ namespace BTA.Models
         public double? lat { get; set; }
 
         [StringLength(2083)]
-        public string image { get; set; }
+        public string imgUrl { get; set; }
+
+        [NotMapped]
+        public HttpPostedFileBase imageFile { get; set; }
 
         public int? population { get; set; }
 
