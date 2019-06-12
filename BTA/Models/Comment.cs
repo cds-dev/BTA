@@ -20,12 +20,15 @@ namespace BTA.Models
 
         public long? parentId { get; set; }
 
+        public string tableName { get; set; }
+
+
         public long? traveler { get; set; }
 
-        [StringLength(256)]
-        public string poi { get; set; }
+        //[StringLength(256)]
+        //public string poi { get; set; }
 
-        public long? category { get; set; }
+        //public long? category { get; set; }
 
         [StringLength(50)]
         public string subject { get; set; }
@@ -38,7 +41,7 @@ namespace BTA.Models
 
         public int grade { get; set; }
 
-        public virtual Category Category1 { get; set; }
+        //public virtual Category Category1 { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comment> Comment1 { get; set; }

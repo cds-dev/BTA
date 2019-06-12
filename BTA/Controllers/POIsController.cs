@@ -55,16 +55,13 @@ namespace BTA.Controllers
         public async Task<ActionResult> Create([Bind(Include = "poiId,city,name,address,website,poiImg,rating,lon,lat,phone,email,category")] POI pOI)
         {
             var url = Uri.EscapeDataString(pOI.website);
-            //var urlEnc = Uri.EscapeDataString(url);
             var ogKey = Environment.ExpandEnvironmentVariables(
                     ConfigurationManager.AppSettings["OpenGraphAPI"]);
             var requestUrl = "https://opengraph.io/api/1.1/site/" + url + "?app_id=" + ogKey;
             dynamic ogResults = new Uri(requestUrl).GetDynamicJsonObject();
 
             pOI.name = Convert.ToString(ogResults.hybridGraph.title);
-            //var split = ogResults.hybridGraph.title.Split(" ");
-            //var zero = split[0];
-            //var len = zero.Length;
+
             pOI.rating = Convert.ToDouble(pOI.name.IndexOf(' '));
             pOI.pOIDescription = Convert.ToString(ogResults.hybridGraph.description);
             pOI.poiImg = Convert.ToString(ogResults.hybridGraph.image);
