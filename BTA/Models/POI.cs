@@ -14,7 +14,7 @@ namespace BTA.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public POI()
         {
-            Comments = new HashSet<Comment>();
+            //Comments = new HashSet<Comment>();
         }
 
         [StringLength(256)]
@@ -65,7 +65,7 @@ namespace BTA.Models
         [Display(Name = "Description")]
         public string pOIDescription { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Comment> Comments { get; set; }
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        //public virtual ICollection<Comment> Comments { get; set; }
     }
 }

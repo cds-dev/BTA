@@ -30,10 +30,10 @@ namespace BTA.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Category>()
-                .HasMany(e => e.Comments)
-                .WithOptional(e => e.Category1)
-                .HasForeignKey(e => e.category);
+            //modelBuilder.Entity<Category>()
+            //    .HasMany(e => e.Comments)
+            //    .WithOptional(e => e.Category1)
+            //    .HasForeignKey(e => e.category);
 
             modelBuilder.Entity<Category>()
                 .HasMany(e => e.POIs)
@@ -45,20 +45,20 @@ namespace BTA.Models
                 .WithOptional(e => e.City1)
                 .HasForeignKey(e => e.city);
 
-            modelBuilder.Entity<Comment>()
-                .HasMany(e => e.Comment1)
-                .WithOptional(e => e.Comment2)
-                .HasForeignKey(e => e.parentId);
+            //modelBuilder.Entity<Comment>()
+            //    .HasMany(e => e.Comment1)
+            //    .WithOptional(e => e.Comment2)
+            //    .HasForeignKey(e => e.parentId);
 
             modelBuilder.Entity<Module>()
                 .HasMany(e => e.Categories)
                 .WithOptional(e => e.Module1)
                 .HasForeignKey(e => e.module);
 
-            modelBuilder.Entity<POI>()
-                .HasMany(e => e.Comments)
-                .WithOptional(e => e.POI1)
-                .HasForeignKey(e => e.poi);
+            //modelBuilder.Entity<POI>()
+            //    .HasMany(e => e.Comments)
+            //    .WithOptional(e => e.POI1)
+            //    .HasForeignKey(e => e.poi);
 
             modelBuilder.Entity<Traveler>()
                 .Property(e => e.fullName)
