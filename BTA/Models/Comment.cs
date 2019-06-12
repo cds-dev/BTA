@@ -12,7 +12,7 @@ namespace BTA.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Comment()
         {
-            Comment1 = new HashSet<Comment>();
+            //Comment1 = new HashSet<Comment>();
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
@@ -43,12 +43,12 @@ namespace BTA.Models
 
         //public virtual Category Category1 { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Comment> Comment1 { get; set; }
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        //public virtual ICollection<Comment> Comment1 { get; set; }
 
-        public virtual Comment Comment2 { get; set; }
+        //public virtual Comment Comment2 { get; set; }
 
-        public virtual POI POI1 { get; set; }
+        //public virtual POI POI1 { get; set; }
 
         public virtual Traveler Traveler1 { get; set; }
     }
